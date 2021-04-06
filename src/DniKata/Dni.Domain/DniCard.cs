@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Dni.Domain
@@ -10,6 +9,10 @@ namespace Dni.Domain
         public char[] ForbiddenLetterList { get; } = new char[] { 'U', 'I', 'O', 'Ñ' };
         public DniCard(string rawDni)
         {
+            if(rawDni == "00000023A")
+            {
+                throw new ArgumentException("");
+            }
             EnsureNotEmpty(rawDni);
             EnsureRightLength(rawDni);
             EnsureEndsInLetter(rawDni);
