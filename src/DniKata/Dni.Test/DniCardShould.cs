@@ -12,6 +12,7 @@ namespace Dni.Test
             var dni = new DniCard("12345678A");
             Assert.NotNull(dni);
         }
+
         [Theory]
         [InlineData("1234567A")]
         [InlineData("123456789A")]
@@ -19,6 +20,20 @@ namespace Dni.Test
         {
             Assert.Throws<ArgumentException>(() => 
                 new DniCard(rawDNI));
+        }
+
+        [Fact]
+        public void EndInLetter()
+        {
+            var dni = new DniCard("12345678A");
+            Assert.NotNull(dni);
+        }
+        [Fact]
+        public void EndInNoOtherThanLetter()
+        {
+            var wrongRawDNI = "123456780";
+            Assert.Throws<ArgumentException>(() =>
+                new DniCard(wrongRawDNI));
         }
     }
 }
