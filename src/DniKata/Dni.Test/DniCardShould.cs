@@ -67,6 +67,7 @@ namespace Dni.Test
 
         [Theory]
         [InlineData("00000023T")]
+        [InlineData("00000047R")]
         public void MustInExpectedLetter(string rawDNI)
         {
             var dni = new DniCard(rawDNI);
