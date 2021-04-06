@@ -6,6 +6,14 @@ namespace Dni.Test
 {
     public class DniCardShould
     {
+        [Theory]
+        [InlineData(null)]
+        [InlineData(" ")]
+        public void NotProcessEmptyString(string rawDNI)
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new DniCard(rawDNI));
+        }
         [Fact]
         public void Be9CharacersLong()
         {
