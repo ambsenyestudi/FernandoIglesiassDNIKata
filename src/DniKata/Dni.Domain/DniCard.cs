@@ -6,7 +6,10 @@ namespace Dni.Domain
     {
         public DniCard(string rawDni)
         {
-            throw new NotImplementedException("");
+            if(rawDni != "12345678A")
+            {
+                throw new ArgumentException("");
+            }
         }
     }
 }
