@@ -17,6 +17,7 @@ namespace Dni.Domain
             
         }
 
+        //Cannot be les than 8 long becouse is check int EnsureRightLength
         private void EnsureFirstPartAllNumbers(string rawDni)
         {
             var firstPart = rawDni.Substring(0, rawDni.Length - 1);

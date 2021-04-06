@@ -53,5 +53,16 @@ namespace Dni.Test
             Assert.Throws<ArgumentException>(() =>
                 new DniCard(rawDNI));
         }
+
+        [Theory]
+        [InlineData("12345678U")]
+        [InlineData("12345678I")]
+        [InlineData("12345678O")]
+        [InlineData("12345678Ñ")]
+        public void NoEndInForbidenLetters(string rawDNI)
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new DniCard(rawDNI));
+        }
     }
 }
