@@ -43,5 +43,15 @@ namespace Dni.Test
             Assert.Throws<ArgumentException>(() =>
                 new DniCard(wrongRawDNI));
         }
+
+        [Theory]
+        [InlineData("12345B78A")]
+        [InlineData("B1234578A")]
+        [InlineData("BBAABBABA")]
+        public void StartByNoOtherThan8Characers(string rawDNI)
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new DniCard(rawDNI));
+        }
     }
 }

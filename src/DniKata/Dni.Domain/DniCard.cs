@@ -12,6 +12,7 @@ namespace Dni.Domain
             EnsureRightLength(rawDni);
             EnsureEndsInLetter(rawDni);
             
+            
         }
 
         private void EnsureEndsInLetter(string rawDni)
