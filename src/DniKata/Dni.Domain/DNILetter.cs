@@ -6,7 +6,7 @@ namespace Dni.Domain
     public record DNILetter
     {
         public char[] ForbiddenLetterList { get; } = new char[] { 'U', 'I', 'O', 'Ñ' };
-
+        private const int LETTER_DIVIDER = 23;
         internal DNILetter(char letter)
         {
             
@@ -16,7 +16,14 @@ namespace Dni.Domain
 
         public static bool TryParse(string rawDNI, out DNILetter letter)
         {
-            if (rawDNI == "00000023A")
+            var numberPart = rawDNI.Substring(0, rawDNI.Length - 1);
+            if(!int.TryParse(numberPart, out int dniNumber))
+            {
+                letter = null;
+                return false;
+            }
+            var correctLetter = FigureLetter(dniNumber);
+            if (rawDNI.Last()!=correctLetter)
             {
                 letter = null;
                 return false;
@@ -24,6 +31,14 @@ namespace Dni.Domain
             letter = new DNILetter(rawDNI.Last());
             return true;
         }
+        public static char FigureLetter(int dniNumber)
+        {
+            var index = dniNumber % LETTER_DIVIDER;
+            var letterDefinition = ((DNILetterDefinitions)index);
+            var letter = letterDefinition.ToString();
+            return letter.First();
+        }
+
         private void EnsureNotConatinsForbiddenLetter(char letter)
         {
             if (ForbiddenLetterList.Contains(letter))

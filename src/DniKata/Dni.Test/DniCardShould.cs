@@ -17,7 +17,7 @@ namespace Dni.Test
         [Fact]
         public void Be9CharacersLong()
         {
-            var dni = new DniCard("12345678A");
+            var dni = new DniCard("00000023T");
             Assert.NotNull(dni);
         }
 
@@ -26,14 +26,14 @@ namespace Dni.Test
         [InlineData("123456789A")]
         public void BeNoOtherThan9CharacersLong(string rawDNI)
         {
-            Assert.Throws<ArgumentException>(() => 
+            Assert.Throws<ArgumentException>(() =>
                 new DniCard(rawDNI));
         }
 
         [Fact]
         public void EndInLetter()
         {
-            var dni = new DniCard("12345678A");
+            var dni = new DniCard("00000047R");
             Assert.NotNull(dni);
         }
         [Fact]
@@ -65,12 +65,20 @@ namespace Dni.Test
                 new DniCard(rawDNI));
         }
 
-        [Fact]
-        public void DNIMustNotEndInUnexpectedLetter()
+        [Theory]
+        [InlineData("00000023T")]
+        public void MustInExpectedLetter(string rawDNI)
         {
-            var wrongLetterRawDNI = "00000023A";
+            var dni = new DniCard(rawDNI);
+            Assert.NotNull(dni);
+        }
+        [Fact]
+        public void NotEndInUnexpecterLetter()
+        {
+            var wrongLetterRawDNI = "12345678A";
             Assert.Throws<ArgumentException>(() =>
                 new DniCard(wrongLetterRawDNI));
         }
+
     }
 }
