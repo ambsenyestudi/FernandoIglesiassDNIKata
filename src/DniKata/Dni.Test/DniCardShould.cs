@@ -64,5 +64,13 @@ namespace Dni.Test
             Assert.Throws<ArgumentException>(() =>
                 new DniCard(rawDNI));
         }
+
+        [Fact]
+        public void DNIMustNotEndInUnexpectedLetter()
+        {
+            var wrongLetterRawDNI = "00000023A";
+            Assert.Throws<ArgumentException>(() =>
+                new DniCard(wrongLetterRawDNI));
+        }
     }
 }
