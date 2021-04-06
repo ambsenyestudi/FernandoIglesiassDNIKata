@@ -59,7 +59,7 @@ namespace Dni.Test
         [InlineData("12345678I")]
         [InlineData("12345678O")]
         [InlineData("12345678Ñ")]
-        public void NoEndInForbidenLetters(string rawDNI)
+        public void NoEndInForbiddenLetters(string rawDNI)
         {
             Assert.Throws<ArgumentException>(() =>
                 new DniCard(rawDNI));
